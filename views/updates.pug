@@ -1,0 +1,43 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title= pageTitle
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    main.container
+      header.page-header
+        h1 Add a Pet Record
+        p Submit this form to create a new Pets custom object record in HubSpot.
+        a.text-link(href="/") Return to the homepage
+      if errorMessage
+        p.error-message= errorMessage
+      form.record-form(action="/update-cobj", method="POST")
+        div.form-field
+          label(for="name") Name
+          input(
+            type="text"
+            id="name"
+            name="name"
+            required
+            value=formData && formData.name ? formData.name : ""
+          )
+        div.form-field
+          label(for="species") Species
+          input(
+            type="text"
+            id="species"
+            name="species"
+            required
+            value=formData && formData.species ? formData.species : ""
+          )
+        div.form-field
+          label(for="bio") Bio
+          textarea(
+            id="bio"
+            name="bio"
+            rows="5"
+            required
+          )= formData && formData.bio ? formData.bio : ""
+        button.button(type="submit") Create pet record

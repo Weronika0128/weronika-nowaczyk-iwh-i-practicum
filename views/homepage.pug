@@ -1,0 +1,30 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title= pageTitle
+    link(rel="stylesheet", href="/css/style.css")
+  body
+    main.container
+      header.page-header
+        h1 Pets Custom Object Records
+        p This table displays custom object records retrieved from HubSpot.
+        a.button(href="/update-cobj") Add to this table
+      if errorMessage
+        p.error-message= errorMessage
+      if pets && pets.length
+        table.records-table
+          thead
+            tr
+              th Name
+              th Species
+              th Bio
+          tbody
+            each pet in pets
+              tr
+                td= pet.properties.name || "—"
+                td= pet.properties.species || "—"
+                td= pet.properties.bio || "—"
+      else
+        p.empty-state No pet records found.
